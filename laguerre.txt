@@ -1,0 +1,15 @@
+clc;clear;
+x=poly(0,'x');
+n=3
+w=zeros(n-1, n);u=zeros(n-1, n);
+L(1)=1;L(2)=1-x;
+for i=2:n
+L(i+1)=((2*i-1-x)*L(i)-(i-1)*L(i-1))/i
+L(i+2)=((2*i+1-x)*L(i+1)-i  *L(i))/(i+1)
+r=real(roots(L(i+1)));
+for j=1:i
+u(i-1,j)=r(j,1);
+w(i-1,j)=r(j, 1)/((i+1)*(horner(L(i+2),r(j, 1))))^2;
+end
+end
+disp([u],[w])
