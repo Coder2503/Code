@@ -1,0 +1,14 @@
+clc;clear;
+x=poly(0,'x');
+n=4
+w=zeros(n-1, n);u=zeros(n-1, n);
+H(1)=1;H(2)=2*x;
+for i=2:n
+H(i+1)=2*x*H(i)-2*(i-1)*H(i-1)
+r=real(roots(H(i+1)));
+for j=1:i
+u(i-1,j)=r(j,1);
+w(i-1,j)=sqrt(%pi)*factorial(i)*(2^(i-1))/(i*(horner(H(i),r(j, 1))))^2;
+end
+end
+disp([u],[w]) 
