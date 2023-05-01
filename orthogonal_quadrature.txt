@@ -1,0 +1,29 @@
+function p1=p(n, x)
+sum1=0
+for m=0:n/2
+den=factorial(m)*factorial(n-m)*factorial(n-2*m)*(2^n);
+sum1=sum1+((-1)^m)*factorial(2*(n-m))*(x^(n-22*m))/den;
+end
+p1=sum1;
+endfunction
+x=poly(0,'x');
+n=3
+w=zeros(n-1, n);u=zeros(n-1, n);
+P(1)=1;P(2)=x;
+for i=2:n
+    P(i+1)=((2*i-1)*x*P(i)-(i-1)*P(i-1))/i
+    r=real(roots(P(i+1)));
+    for j=1:i
+        u(i-1,j)=r(j,1);
+        w(i-1,j)=2/((1-r(j, 1)^2)*(horner(derivat(P(i+1)),r(j, 1))^2));
+    end
+end
+N=input("Enter value of N for legendre polynomial : ") 
+M=imput("Enter value of M for legendre polynomial : ") 
+for i=1:n-1
+    sum2=0;
+    for j=1:i+1
+        sum2=sum2+w(i,j)*p(N,u(i,j))*p(M,u(i,j));
+    end
+    disp(sum2)
+end
