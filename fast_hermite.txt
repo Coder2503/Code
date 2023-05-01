@@ -1,0 +1,17 @@
+Tn=zeros(2,2);
+n=input("Enter the value of max n for Hermite quadrature : ") 
+function y=f(u) 
+    y=//define modified integral 
+for i=2:n
+    sum1=0;
+    Tn=resize_matrix(Tn,i,i);
+    Tn(i-1,i)=sqrt((i-1)/2);
+    Tn(i,i-1)=Tn(i-1,i);
+    [v d]=spec(Tn);
+    for k=1:i
+        u(i-1,k)=d(k,k);
+        w(i-1,k)=sqrt(%pi)*(v(1,k)^2);
+        sum1=sum1+w(i-1,k)*f(u(i-1,k));
+    end
+    disp(sum1)//i point quadrature result
+end
